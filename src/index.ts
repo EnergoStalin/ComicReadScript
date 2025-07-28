@@ -862,6 +862,7 @@ try {
 
     // #[kemono](https://kemono.su)
     case 'kemono.su':
+    case 'kemono.cr':
     case 'kemono.party': {
       inject('site/kemono');
       break;
