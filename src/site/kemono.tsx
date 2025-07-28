@@ -28,17 +28,17 @@ import {
 
   setComicLoad(
     () =>
-      querySelectorAll<HTMLAnchorElement>('.post__thumbnail a').map(
-        (e) => e.href,
-      ),
-    'original',
-  );
-  setComicLoad(
-    () =>
       querySelectorAll<HTMLImageElement>('.post__thumbnail img').map(
         (e) => e.src,
       ),
     'thumbnail',
+  );
+  setComicLoad(
+    () =>
+      querySelectorAll<HTMLAnchorElement>('.post__thumbnail a').map(
+        (e) => e.href,
+      ),
+    'original',
   );
 
   // 在切换时重新获取图片
