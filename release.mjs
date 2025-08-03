@@ -1,10 +1,28 @@
-import { readFileSync } from 'node:fs';
+import { readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import release from 'release-it';
+
 import shell from 'shelljs';
+import release from 'release-it';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+function jsdeliverify(p) {
+  const pp = path.parse(p); delete pp.base;
+  const parts = pp.name.split('.')
+  parts.splice(1, 0, 'jsdelivr')
+  pp.name = parts.join('.')
+
+  writeFileSync(
+    path.format(pp),
+    readFileSync(p)
+      .toString('utf-8')
+      .replaceAll(
+        /registry\.npmmirror\.com\/([^/]+)\/([^/]+)\/files\/(.+)/g,
+        'cdn.jsdelivr.net/npm/$1@$2/$3'
+      )
+  );
+}
 
 const exec = (...commands) => {
   const res = shell.exec(commands.join(' && '), {
@@ -33,6 +51,8 @@ const exec = (...commands) => {
       path.join(__dirname, './dist/adguard.js'),
       path.join(__dirname, './ComicRead-AdGuard.user.js'),
     );
+
+    jsdeliverify('./ComicRead.user.js');
 
     // 提交上传更改
     exec(
