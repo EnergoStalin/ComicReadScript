@@ -150,9 +150,9 @@ export const getMetaData = (isDevMode: boolean) => {
     resource: resource[isDevMode ? 'dev' : 'prod'],
     supportURL: 'https://github.com/hymbz/ComicReadScript/issues',
     updateURL:
-      'https://github.com/hymbz/ComicReadScript/raw/master/ComicRead.user.js',
+      'https://github.com/EnergoStalin/ComicReadScript/raw/local/ComicRead.user.js',
     downloadURL:
-      'https://github.com/hymbz/ComicReadScript/raw/master/ComicRead.user.js',
+      'https://github.com/EnergoStalin/ComicReadScript/raw/local/ComicRead.user.js',
   };
 
   const keyLength = Math.max(...Object.keys(meta).map((key) => key.length)) + 1;
