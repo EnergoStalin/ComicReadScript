@@ -54,8 +54,8 @@
 // @resource        _tensorflow|tfjs https://registry.npmmirror.com/@tensorflow/tfjs/4.22.0/files/dist/tf.min.js
 // @resource        _tensorflow|tfjs-backend-webgpu https://registry.npmmirror.com/@tensorflow/tfjs-backend-webgpu/4.22.0/files/dist/tf-backend-webgpu.js
 // @supportURL      https://github.com/hymbz/ComicReadScript/issues
-// @updateURL       https://github.com/hymbz/ComicReadScript/raw/master/ComicRead.user.js
-// @downloadURL     https://github.com/hymbz/ComicReadScript/raw/master/ComicRead.user.js
+// @updateURL       https://github.com/EnergoStalin/ComicReadScript/raw/local/ComicRead.user.js
+// @downloadURL     https://github.com/EnergoStalin/ComicReadScript/raw/local/ComicRead.user.js
 // ==/UserScript==
 
 
