@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            ComicRead
 // @namespace       ComicRead
-// @version         12.2.0
+// @version         12.2.0u1
 // @description     为漫画站增加双页阅读、翻译等优化体验的增强功能。百合会（记录阅读历史、自动签到等）、百合会新站、动漫之家（解锁隐藏漫画）、E-Hentai（关联外站、快捷收藏、标签染色、识别广告页等）、nhentai（彻底屏蔽漫画、无限滚动）、Yurifans（自动签到）、拷贝漫画(copymanga)（显示最后阅读记录、解锁隐藏漫画）、Pixiv、再漫画、明日方舟泰拉记事社、禁漫天堂、漫画柜(manhuagui)、动漫屋(dm5)、绅士漫画(wnacg)、mangabz、komiic、MangaDex、NoyAcg、無限動漫、熱辣漫畫、hitomi、SchaleNetwork、nude-moon、kemono、nekohouse、welovemanga、HentaiZap、最前線、Tachidesk
 // @description:en  Add enhanced features to the comic site for optimized experience, including dual-page reading and translation. E-Hentai (Associate nhentai, Quick favorite, Colorize tags, Floating tag list, etc.) | nhentai (Totally block comics, Auto page turning) | hitomi | Anchira | kemono | nude-moon | nekohouse | welovemanga.
 // @description:ru  Добавляет расширенные функции для удобства на сайт, такие как двухстраничный режим и перевод.
