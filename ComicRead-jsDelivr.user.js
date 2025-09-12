@@ -2,8 +2,8 @@
 // @name            ComicRead
 // @namespace       ComicRead
 // @version         12.2.0
-// @description     为漫画站增加双页阅读、翻译等优化体验的增强功能。百合会（记录阅读历史、自动签到等）、百合会新站、动漫之家（解锁隐藏漫画）、E-Hentai（关联外站、快捷收藏、标签染色、识别广告页等）、nhentai（彻底屏蔽漫画、无限滚动）、Yurifans（自动签到）、拷贝漫画(copymanga)（显示最后阅读记录、解锁隐藏漫画）、Pixiv、再漫画、明日方舟泰拉记事社、禁漫天堂、漫画柜(manhuagui)、动漫屋(dm5)、绅士漫画(wnacg)、mangabz、komiic、MangaDex、NoyAcg、無限動漫、熱辣漫畫、hitomi、SchaleNetwork、kemono、nekohouse、welovemanga、HentaiZap、最前線、Tachidesk
-// @description:en  Add enhanced features to the comic site for optimized experience, including dual-page reading and translation. E-Hentai (Associate nhentai, Quick favorite, Colorize tags, Floating tag list, etc.) | nhentai (Totally block comics, Auto page turning) | hitomi | Anchira | kemono | nekohouse | welovemanga.
+// @description     为漫画站增加双页阅读、翻译等优化体验的增强功能。百合会（记录阅读历史、自动签到等）、百合会新站、动漫之家（解锁隐藏漫画）、E-Hentai（关联外站、快捷收藏、标签染色、识别广告页等）、nhentai（彻底屏蔽漫画、无限滚动）、Yurifans（自动签到）、拷贝漫画(copymanga)（显示最后阅读记录、解锁隐藏漫画）、Pixiv、再漫画、明日方舟泰拉记事社、禁漫天堂、漫画柜(manhuagui)、动漫屋(dm5)、绅士漫画(wnacg)、mangabz、komiic、MangaDex、NoyAcg、無限動漫、熱辣漫畫、hitomi、SchaleNetwork、nude-moon、kemono、nekohouse、welovemanga、HentaiZap、最前線、Tachidesk
+// @description:en  Add enhanced features to the comic site for optimized experience, including dual-page reading and translation. E-Hentai (Associate nhentai, Quick favorite, Colorize tags, Floating tag list, etc.) | nhentai (Totally block comics, Auto page turning) | hitomi | Anchira | kemono | nude-moon | nekohouse | welovemanga.
 // @description:ru  Добавляет расширенные функции для удобства на сайт, такие как двухстраничный режим и перевод.
 // @author          hymbz
 // @license         AGPL-3.0-or-later
@@ -14779,6 +14779,59 @@ const main = require('main');
             isMangaPage
           }
         };
+        break;
+      }
+
+    // #[nude-moon](https://nude-moon.org)
+    // test: https://nude-moon.org/22729--zone-himitsu-no-tomodachi--tayney-drug.html
+    case 'nude-moon.org':
+      {
+const helper = require('helper');
+const main = require('main');
+
+(async () => {
+  const isMangaPage = () => location.pathname.match(/^\/[0-9]+--/);
+  await helper.waitUrlChange(isMangaPage);
+  const {
+    store,
+    setState,
+    showComic,
+    init
+  } = await main.useInit('nude-moon', {
+    autoShow: false,
+    defaultOption: {
+      pageNum: 1
+    }
+  });
+  const original = async () => {
+    const url = new URL(location.href);
+    const parts = url.pathname.split('-');
+    parts.splice(1, 0, 'online');
+    url.pathname = parts.join('-');
+    const html = await fetch(url).then(e => e.text());
+    const doc = helper.domParse(html);
+    const script = Array.from(doc.querySelectorAll("script")).filter(e => e.textContent.includes("/manga/"))?.[0];
+    if (!script) return [];
+    return Array.from(script.textContent.matchAll(/\/manga\/[^']+/g), e => `https://nude-moon.org${e[0]}`);
+  };
+  setState('comicMap', '', {
+    getImgList: original
+  });
+  helper.onUrlChange(async lastUrl => {
+    if (!lastUrl) return;
+    if (!isMangaPage()) return setState(state => {
+      state.fab.show = false;
+      state.manga.show = false;
+    });
+    setState(state => {
+      state.fab.show = undefined;
+      state.manga.show = false;
+    });
+    if (store.options.autoShow) await showComic();
+  });
+  init();
+})();
+
         break;
       }
 
